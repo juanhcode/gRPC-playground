@@ -10,12 +10,26 @@ public class SimpleProtoDemo {
 
     public static void main(String[] args) {
 
-        Person person = Person.newBuilder()
-                .setName("John Doe")
-                .setAge(18)
-                .setEmail("Hola")
-                .build();
+        //Create person 1
+        Person person1 = createPerson("Alice", 30, "alice@gmail.com");
+        logger.info("Person 1: {}", person1);
+        // Create person 2
+        Person person2 = createPerson("Bob", 25, "bob@gmail.com");
+        logger.info("Person 2: {}", person2);
 
-        logger.info("Person: {}", person);
+        //compare persons
+        logger.info("Equals: {}", person1.equals(person2));
+
+        //Create person with different values
+        Person person3 = person1.toBuilder().setName("Pepe").build();
+        logger.info("Person 3: {}", person3);
+    }
+
+    private static Person createPerson(String name, int age, String email) {
+        return Person.newBuilder()
+                .setName(name)
+                .setAge(age)
+                .setEmail(email)
+                .build();
     }
 }
